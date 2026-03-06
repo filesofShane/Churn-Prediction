@@ -13,7 +13,7 @@ This project builds a machine learning pipeline to predict high-risk customers a
 ## Project Structure
 - data/
 -  notebooks/
-  -  eda.ipynb
+  - eda.ipynb
 - src/
   - preprocessing.py
   - train.py
