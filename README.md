@@ -60,7 +60,7 @@ Insights will be dreived after selecting the optimal recall-precisin balance for
 python -m venv venv
 
 2. Activate environment
-source venv/bin/activate  # or Windows equivalent
+source venv/bin/activate or Windows equivalent
 
 3. Install dependencies
 pip install -r requirements.txt
