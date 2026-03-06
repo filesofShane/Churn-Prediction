@@ -3,7 +3,7 @@
 ## Problem
 
 Customer churn significantly impacts recurring revenue.
-This project builds a machine learning pipeline to predict high-risk customers and simulate retnetion targeting strategies
+This project builds a machine learning pipeline to predict high-risk customers and simulate retention targeting strategies
 
 ## Dataset
 - 440,00+ customer records
@@ -11,22 +11,18 @@ This project builds a machine learning pipeline to predict high-risk customers a
 - Bianry target variable: Churn (1 = churned, 0 = retained)
 
 ## Project Structure
-│
-├── data/
-│
-├── notebooks/
-│   └── eda.ipynb
-│
-├── src/
-│   ├── preprocessing.py
-│   ├── train.py
-│   └── evaluate.py
-│
-├── models/
-│
-├── main.py
-├── requirements.txt
-└── README.md
+- data/
+-  notebooks/
+  -  eda.ipynb
+- src/
+  - preprocessing.py
+  - train.py
+  - evaluate.py
+- models/
+  - churn-prediction.joblib    
+- main.py
+- requirements.txt
+- README.md
 
 ## Methodology
 
