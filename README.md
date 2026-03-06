@@ -77,3 +77,6 @@ The model achieved an ROC-AUC score of **0.91**, indicating strong classificatio
 ### Confusion Matrix
 <img src="reports/Confusion Matrix.png" width="600">
 
+## To Do 
+
+Create a dashboard using streamlit
