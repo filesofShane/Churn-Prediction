@@ -64,19 +64,33 @@ pip install -r requirements.txt
 4. Run the pipeline
 python main.py
 
-## Model Performance thus far
+## Model Performance (Logsitic Regression)
 
 ### ROC Curve
-<img src="reports/ROC_AUC plot.png" width="600">
+<img src="reports/ROC (Logistic Regression).png" width="600">
 
 The model achieved an ROC-AUC score of **0.91**, indicating strong classification performance.
 
 ### Classification Report
-<img src="reports/Classification Report.png" width="600">
+<img src="reports/Classification Report (Logistic Regression).png" width="600">
 
 ### Confusion Matrix
-<img src="reports/Confusion Matrix.png" width="600">
+<img src="reports/Confusion Matrix (Logistic Regression).png" width="600">
 
-## To Do 
+## Model Performance (Random Forest)
 
-Create a dashboard using streamlit
+### ROC Curve
+<img src="reports/ROC (Random Forest).png" width="600">
+
+The model achieved an ROC-AUC score of **0.95**, indicating a stronger classification performance.
+
+### Classification Report
+<img src="reports/Classification Report (Random Forest).png" width="600">
+
+### Confusion Matrix
+<img src="reports/Confusion Matrix (Random Forest).png" width="600">
+
+## TO DO
+
+## Model Performance (Gradient Boost)
+ 
