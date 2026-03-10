@@ -11,7 +11,8 @@ This project builds a machine learning pipeline to predict high-risk customers a
 - Bianry target variable: Churn (1 = churned, 0 = retained)
 
 ## Project Structure
-- data/
+- api/
+  - app.py
 -  notebooks/
   - eda.ipynb
 - src/
