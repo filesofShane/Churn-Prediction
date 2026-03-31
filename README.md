@@ -34,7 +34,7 @@ The project follows a standard machine learning pipeline:
 4. Feature Preprocessing
 5. Model Training
 6. Model Evaluation
-7. Model deployment via FastAPI
+7. Model deployment via Streamlit
 
 Model comparison in progress. Planned models include:
 - Logistic Regression (baseline)
