@@ -3,3 +3,7 @@ __pycache__/
 .venv
 data/
 .ipynb_checkpoints/
+
+# Model artifacts and saved splits are build outputs — regenerate with train.py
+models/*.pkl
+models/test_split.pkl

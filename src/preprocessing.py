@@ -1,58 +1,66 @@
-# Importing necessary libraries
+# Data cleaning and the modelling preprocessor.
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-# Preprocessing function to clean the DataFrame
-def clean_df(df: pd.DataFrame) -> pd.DataFrame:
-    df = df.copy()  # Avoid modifying the original DataFrame
+import config
 
-    # Drop rows with null values
-    df = df.dropna()
-    
-    # Ensure 'Churn' column exists
-    df = df[df["Churn"].notna()]
-    df["Churn"] = df["Churn"].astype(int)
 
-    # Clean all strings columns by stripping whitespace    
-    for col in df.select_dtypes(include=['object']).columns:
+def clean_df(df: pd.DataFrame, target: str = config.TARGET) -> pd.DataFrame:
+    """Light cleaning only. Feature-level missing values are handled by the
+    preprocessor's imputers, so we do NOT drop rows on feature nulls here."""
+    df = df.copy()
+
+    if target not in df.columns:
+        raise KeyError(
+            f"Target column '{target}' not found. Available: {list(df.columns)}"
+        )
+
+    # Drop rows with missing target and convert to int (the source data has some nulls and the type is object).
+    df = df[df[target].notna()]
+    df[target] = df[target].astype(int)
+
+    # Strip whitespace from string columns to avoid issues with unseen categories during inference.
+    for col in df.select_dtypes(include=["object"]).columns:
         df[col] = df[col].astype(str).str.strip()
 
     return df
 
 
-# Function to split features and target variable
-def split_xy(df: pd.DataFrame, target: str = "Churn"):
-    # Separate features and target variable
+def split_xy(df: pd.DataFrame, target: str = config.TARGET):
+    """Separate features/target and drop identifier-like columns."""
     X = df.drop(columns=[target])
     y = df[target]
-    
-    # Drop ID like columns if they exist
-    drop_cols = [col for col in X.columns if 'id' in col.lower()]
+
+    drop_cols = [c for c in X.columns if config.ID_HINT in c.lower()]
     if drop_cols:
         X = X.drop(columns=drop_cols)
 
     return X, y
 
-# Building a preprocessor to ensure the data is in the correct format for modeling
+
 def build_preprocessor(X: pd.DataFrame) -> ColumnTransformer:
-    num_cols = X.select_dtypes(include=['int64', 'float64']).columns
-    cat_cols = X.select_dtypes(include=['object']).columns
+    """Numeric: median-impute + scale (needed for LogReg convergence and
+    interpretable coefficients). Categorical: mode-impute + one-hot."""
+    num_cols = X.select_dtypes(include=["int64", "float64"]).columns
+    cat_cols = X.select_dtypes(include=["object", "category", "bool"]).columns
 
     num_pipe = Pipeline([
-        ("imputer", SimpleImputer(strategy="median"))])
-    
+        ("imputer", SimpleImputer(strategy="median")),
+        ("scaler", StandardScaler()),
+    ])
+
     cat_pipe = Pipeline([
         ("imputer", SimpleImputer(strategy="most_frequent")),
-        ("encoder", OneHotEncoder(handle_unknown="ignore"))
-        ])
-    
+        ("encoder", OneHotEncoder(handle_unknown="ignore")),
+    ])
+
     return ColumnTransformer(
-        transformers =[
+        transformers=[
             ("num", num_pipe, num_cols),
             ("cat", cat_pipe, cat_cols),
         ],
-        remainder="drop"
+        remainder="drop",
     )
