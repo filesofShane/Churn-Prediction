@@ -134,6 +134,4 @@ trading a little precision for higher recall — appropriate when a missed churn
 costs more than a wasted retention offer.
 
 ## TODO
-- [ ] Add cross-validation to training
-- [ ] Add unit tests for preprocessing and the data contract
 - [ ] Per-prediction explanations (SHAP) in the dashboard
