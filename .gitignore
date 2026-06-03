@@ -5,5 +5,6 @@ data/
 .ipynb_checkpoints/
 
 # Model artifacts and saved splits are build outputs — regenerate with train.py
-models/*.pkl
+models/churn_model_LogReg.pkl
+models/churn_model_GradBoost.pkl
 models/test_split.pkl
