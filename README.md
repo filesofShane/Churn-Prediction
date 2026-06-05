@@ -132,6 +132,3 @@ team acts on the same risk bands the model was validated against. The max-F1
 suggestions above (0.18–0.35) flag more at-risk customers than the 0.50 default,
 trading a little precision for higher recall — appropriate when a missed churner
 costs more than a wasted retention offer.
-
-## TODO
-- [ ] Per-prediction explanations (SHAP) in the dashboard
